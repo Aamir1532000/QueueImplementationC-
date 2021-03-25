@@ -16,19 +16,21 @@ public:
 };
 
 void Queue::enqueue(int x){
-if(Rear==Size-1)
+if(Rear+1)%Size==Front)
     cout<<"Queue is Full";
 else{
-    Rear++;
+    Rear=(Rear+1)%Size;
     Q[Rear]=x;
 }
 
 }
 
 void Queue::Display(){cout<<"updated queue:\n";
-for(int i=Front+1;i<=Rear;i++){
-    cout<<Q[i]<<"  "<<"\n";
-}
+int i=Front+1;
+do{
+    cout<<Q[i]<<" \n";
+    i=(i+1)%Size ;
+}while(i!=(Rear+1)%Size);
 
 }
 
@@ -38,8 +40,8 @@ if(Front==Rear)
     cout<<"Queue is empty";
 else
 {
-    x=Q[Front+1];
-    Front++;
+    Front=(Front+1)%Size;
+    x=Q[Front];
 }
     return x;
 }
@@ -52,7 +54,7 @@ q.enqueue(4);
 q.enqueue(5);
 q.enqueue(6);
 q.enqueue(7);
-q.enqueue(8);
+
 q.Display();
 q.dequeue();
 q.dequeue();
